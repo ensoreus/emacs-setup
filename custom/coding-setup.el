@@ -67,3 +67,11 @@
 (define-key global-map (kbd "C-c ;") 'iedit-mode)
 (global-company-mode)
 (provide 'coding-setup)
+
+;;magit
+(use-package magit
+  :ensure t)
+
+(use-package uuidgen
+  :ensure t
+  :defer t)

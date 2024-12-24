@@ -1,9 +1,10 @@
 (use-package python-mode
-  :ensure nil
+  :ensure t
   :custom
   (python-shell-interpreter "python3"))
 
 (use-package company
+  :ensure t
   :after lsp-mode
   :hook (lsp-mode . company-mode)
   :bind (:map company-active-map
@@ -81,6 +82,7 @@
 ;; If you really want to try with jedi+company, use below scripts it
 ;; (remove the :disabled tag)
 (use-package jedi
+  :ensure t
   :after (epc pos-tip)
   :init
   :hook
@@ -108,18 +110,30 @@
   :ensure t
   :hook (pyhton-mode . flymake-mode))
 
-(setenv "WORKON_HOME" "/Users/philippmaliuta/Documents/Projects/ml")
-
 (use-package conda
   :ensure t
   :init
-  (setq conda-anaconda-home "/opt/miniconda3")
-  (setq conda-env-home-directory "/opt/miniconda3")
-  (setq conda-env-executables-dir "/opt/miniconda3/bin/")
-  (conda-env-activate "tf"))
+  (setq conda-anaconda-home "~/opt/miniconda3")
+  (setq conda-env-home-directory "~/opt/miniconda3")
+  (setq conda-env-executables-dir "~/opt/miniconda3/bin/")
+  (conda-env-activate "base"))
 
 (use-package ipython-shell-send
   :ensure t
   :bind (("C-c C-i" . ipython-shell-send-buffer)))
+
+(use-package py-smart-operator
+  :ensure t
+  :hook (python-mode . py-smart-operator-mode))
+
+(use-package pydoc
+  :ensure t
+  :bind (("C-c d p" . pydoc-at-point)
+         ("C-c d b" . pydoc-browse)
+         ("C-c d i" . pydoc)))
+
+(use-package pyimport
+  :ensure t
+  :hook (python-mode . py-smart-operator-mode))
 
 (provide 'python-setup)
